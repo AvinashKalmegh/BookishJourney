@@ -19,7 +19,7 @@ const postReviewData = async(req, res)=>{
     }
 }
 
-const deleteReviewData = async()=>{
+const deleteReviewData = async(req,res)=>{
     try {
         let {_id} = req.params;
         let data = await ReviewModel.findOneAndDelete({_id});
@@ -29,4 +29,15 @@ const deleteReviewData = async()=>{
     }
 }
 
-module.exports = {getReviewData, postReviewData, deleteReviewData};
+const updateReviewData = async(req,res)=>{
+    try {
+        console.log(req.body, req.params.id);
+        let data = await ReviewModel.findByIdAndUpdate(req.params.id,req.body);
+
+        res.send({result: "Data successfully updated"});
+    } catch (error) {
+        res.send(error.message);
+    }
+}
+
+module.exports = {getReviewData, postReviewData, deleteReviewData, updateReviewData};
