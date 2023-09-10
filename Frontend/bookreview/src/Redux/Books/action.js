@@ -4,7 +4,7 @@ import {
   GET_BOOKS_FAILURE,
   GET_BOOKS_REQUEST,
   GET_BOOKS_SUCCESS,
-} from "./actionType";
+} from "./actionTypes";
 
 const getBooksRequestAction = () => {
   return { type: GET_BOOKS_REQUEST };

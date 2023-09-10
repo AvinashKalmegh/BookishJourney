@@ -1,0 +1,134 @@
+.footer{
+    margin-top: 50px;
+    
+}
+.footerDark{
+    margin-top: 50px;
+    background-color: #222531;
+}
+.footerIntro{
+    border: 0px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8fafd;
+}
+.footerIntroDark{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222531;
+}
+#footerh1{
+    border: 0px solid blue;
+    font-size: 35px;
+    
+}
+#footerP{
+    width: 70%;
+    font-family: 50px;
+    padding-bottom: 100px;
+}
+#footerList{
+    border: 0px solid black;
+    display: flex;
+}
+#footerLogo{
+    width: 40%;
+    padding: 50px;
+}
+#footerLogo img{
+    width: 35%;
+}
+#footerData{
+    border: 0px solid blue;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+#listBox{
+    border: 0px solid black;
+}
+#listBox h1{
+    font-weight: 600;
+    font-size: 16px;
+}
+#listBox p{
+    font-size: 14px;
+    color: #58667e;
+    margin-top: 12px;
+    cursor: pointer;
+    font-weight: 500;
+}
+#listBox p:hover{
+    color: #3861fb;
+}
+#footerDownload{
+    border: 0px solid black;
+    width: 95%;
+    margin: auto;
+    padding:30px 0px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+#footerPtag{
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+#appStore{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18%;
+}
+
+
+
+@media (max-width:942px){
+    .footerIntro,.footerIntroDark{
+        border: 0px solid black;
+        display: grid;
+    }
+    #footerIntroData{
+        border: 0px solid blue;
+        width: 90%;
+        margin: auto;
+    }
+    #footerP{
+        padding-bottom:50px ;
+    }
+    #footerSubscribeBtn{
+        width: 100%;
+        margin: auto;
+    }
+    #footerList{
+        display: grid;
+    }
+    #footerLogo{
+        width: 100%;
+        padding: 20px;
+    }
+    #footerLogo img{
+        width: 60%;
+    }
+    #footerData{
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: auto;
+        gap: 30px;
+    }
+    #listBox{
+        border: 0px solid black;
+    }
+    #footerDownload{
+        display:grid ;
+    }
+    #appStore{
+        width: 80%;
+        margin: auto;
+    }
+
+}

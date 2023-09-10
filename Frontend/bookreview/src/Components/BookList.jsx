@@ -1,9 +1,46 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getBooks } from "../Redux/Books/action";
+import { BookCard } from "./BookCard";
 
-const BookList = () => {
+import styled from "styled-components";
+import { useLocation, useSearchParams } from "react-router-dom";
+
+export const BooksList = () => {
+  const dispatch = useDispatch();
+  const books = useSelector((store) => store.bookReducer.books);
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const order = searchParams.get("order");
+    let paramObj = {
+      params: {
+        category: searchParams.getAll("category"),
+        _sort: order && "release_year",
+        _order: order, //acs or desc
+      },
+    };
+    dispatch(getBooks(paramObj));
+  }, [location.search]);
   return (
-    <div>BookList</div>
-  )
-}
+    <DivWrapper>
+      {books.length > 0 &&
+        books.map((el) => {
+          return <BookCard key={el.id} book={el} />;
+        })}
+    </DivWrapper>
+  );
+};
 
-export default BookList
+const DivWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-gap: 20px;
+  width: 90%;
+  margin: auto;
+`;
+
+// conditional css
+
+// module.css

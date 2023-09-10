@@ -1,0 +1,9 @@
+.bookCard:hover{
+    /* border: none; */
+    /* box-shadow: none; */
+    /* background: rgb(133,131,156); */
+    /* background: linear-gradient(120deg, #bc908e 2%, rgba(207,204,226,1) 53%, #bc908e 94%); */
+    transform: scale(1.03);
+    transition-property: transform;
+    transition-duration: 1s;
+}
