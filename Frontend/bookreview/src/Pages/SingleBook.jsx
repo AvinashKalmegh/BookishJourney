@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { BookCard } from "../Components/BookCard";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
+import ReviewDetail from "../Components/ReviewDetail";
+import styled from "styled-components";
+import StarRating from "../Components/StarRating";
 
 const SingleBook = () => {
   const { id } = useParams();
@@ -18,12 +21,27 @@ const SingleBook = () => {
   }, []);
 
   return (
-    <Box mt={"120px"}>
-      {/* <h1>Single Book {id}</h1> */}
+    <Flex  gap={2} w={"95%"} m={"auto"} mt={"120px"}>
       <BookCard book={book} />
-    </Box>
+      <ReviewDetail book={book}/>
+    </Flex>
+
   );
 };
 
 
 export default SingleBook;
+
+
+
+const DivWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  margin-top: 120px;
+  justify-content: center;
+  border:1px solid red;
+  width:100%;
+
+`;
+
+

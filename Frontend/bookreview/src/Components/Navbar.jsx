@@ -73,7 +73,7 @@ export default function Navbar() {
           </Button>
         </InputRightAddon>
       </InputGroup>
-          <Flex  alignItems={'center'} border={"0px solid red"} w={"38%"} justifyContent={"space-around"}  fontWeight={"450"}>
+          <Flex  alignItems={'center'} border={"0px solid red"} w={"33%"} justifyContent={"space-around"}  fontWeight={"450"}>
           
           
           <Link to="/">
@@ -82,8 +82,9 @@ export default function Navbar() {
           <Link to={"/dashboard"}>
             <Text className='menu'>Dashboard</Text>
           </Link>
+          <Link to={"/signin"}>
             <Text className='menu'>Signin</Text>
-            <Text className='menu'>Signup</Text>
+          </Link>
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
