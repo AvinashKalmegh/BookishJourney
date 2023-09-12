@@ -1,4 +1,4 @@
-# BookishJourney
+# Bookish Journey
 <h2>Landing Page : </h2>
 
 ![landing](https://github.com/AvinashKalmegh/BookishJourney/assets/107553043/4f8879f6-c0a4-4cf1-9bc7-b761224427c0)
