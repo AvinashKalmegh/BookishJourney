@@ -21,8 +21,7 @@ const postReviewData = async(req, res)=>{
 
 const deleteReviewData = async(req,res)=>{
     try {
-        let {_id} = req.params;
-        let data = await ReviewModel.findOneAndDelete({_id});
+        let data = await ReviewModel.findByIdAndDelete(req.params.id);
         res.send({result : "Data successfully deleted"});
     } catch (error) {
         res.send(error.message);
@@ -40,4 +39,14 @@ const updateReviewData = async(req,res)=>{
     }
 }
 
-module.exports = {getReviewData, postReviewData, deleteReviewData, updateReviewData};
+const dailyData = async(req, res)=>{
+    try {
+        let data = await ReviewModel.find({createdAt: new Date().getDate()});
+        // console.log(new Date().getDate());
+        res.send({"data": data})
+    } catch (error) {
+        res.send(error.message);
+    }
+}
+
+module.exports = {getReviewData, postReviewData, deleteReviewData, updateReviewData, dailyData};

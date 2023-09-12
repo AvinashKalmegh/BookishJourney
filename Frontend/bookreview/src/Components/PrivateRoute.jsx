@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute = () => {
-  return (
-    <div>PrivateRoute</div>
-  )
-}
+export const PrivateRoute = ({ children }) => {
+  const isAuth = useSelector((store) => store.authReducer.isAuth);
+  let isToken = JSON.parse(localStorage.getItem("token"));
+  const location = useLocation();
+  // console.log((isToken,"pr"));
 
-export default PrivateRoute
+  if (isToken) {
+    return children; //<SingleBook />
+  }
+  return <Navigate to={"/signin"} state={location.pathname} replace />;
+};

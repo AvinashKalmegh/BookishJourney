@@ -1,0 +1,5 @@
+#reviewdetail:hover{
+    transform: none;
+    transition-property: none;
+    transition-duration: 0;
+}

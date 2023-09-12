@@ -23,14 +23,29 @@ const editBookSuccess = () => {
 };
 
 export const getBooks =
-  (param = {}) =>
+  () =>
   (dispatch) => {
     dispatch(getBooksRequestAction());
 
     axios
-      .get("http://localhost:8080/books", param)
+      .get(`http://localhost:3500/api/book/`)
       .then((res) => {
-        dispatch(getBooksSuccessAction(res.data));
+        dispatch(getBooksSuccessAction(res.data.result));
+      })
+      .catch((err) => {
+        dispatch(getBooksFailureAction());
+      });
+  };
+
+  export const getSpecificBooks =
+  (id) =>
+  (dispatch) => {
+    dispatch(getBooksRequestAction());
+
+    axios
+      .get(`http://localhost:3500/api/book/${id}`)
+      .then((res) => {
+        dispatch(getBooksSuccessAction(res.data.result));
       })
       .catch((err) => {
         dispatch(getBooksFailureAction());
@@ -38,7 +53,7 @@ export const getBooks =
   };
 
 export const editBook = (id, bookData) => (dispatch) => {
-  return axios.patch(`http://localhost:8080/books/${id}`, bookData).then(() => {
+  return axios.patch(`http://localhost:3500/api/book/${id}`, bookData).then(() => {
     dispatch(editBookSuccess());
   });
 };

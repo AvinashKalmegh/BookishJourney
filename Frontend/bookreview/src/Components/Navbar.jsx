@@ -23,7 +23,9 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, Search2Icon, SunIcon } from '@chakra-ui/icons';
 import "./Navbar.css";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 interface Props {
   children: React.ReactNode
@@ -51,6 +53,16 @@ const NavLink = (props: Props) => {
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate();
+
+  let istoken = JSON.parse(localStorage.getItem("token"));
+  
+  
+  const logout= ()=>{
+    localStorage.removeItem("token");
+    navigate("/signin")
+  }
+
   return (
     
       <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} po>
@@ -82,9 +94,10 @@ export default function Navbar() {
           <Link to={"/dashboard"}>
             <Text className='menu'>Dashboard</Text>
           </Link>
-          <Link to={"/signin"}>
+          {istoken ? <></> : <Link to={"/signin"}>
             <Text className='menu'>Signin</Text>
-          </Link>
+          </Link>}
+          
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -118,7 +131,8 @@ export default function Navbar() {
                   <MenuDivider />
                   <MenuItem>Your Servers</MenuItem>
                   <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
+                  {istoken ? <MenuItem onClick={logout}>Logout</MenuItem> : <></> }
+                  
                 </MenuList>
               </Menu>
             </Stack>

@@ -12,22 +12,17 @@ export const BooksList = () => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
 
+  // console.log(books);
   useEffect(() => {
-    const order = searchParams.get("order");
-    let paramObj = {
-      params: {
-        category: searchParams.getAll("category"),
-        _sort: order && "release_year",
-        _order: order, //acs or desc
-      },
-    };
-    dispatch(getBooks(paramObj));
+   
+    dispatch(getBooks());
+
   }, [location.search]);
   return (
     <DivWrapper>
       {books.length > 0 &&
         books.map((el) => {
-          return <BookCard key={el.id} book={el} />;
+          return <BookCard key={el._id} book={el} />;
         })}
     </DivWrapper>
   );

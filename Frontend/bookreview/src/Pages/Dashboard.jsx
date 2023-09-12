@@ -1,60 +1,123 @@
-import React from 'react';
-// import { Box, Text } from '@chakra-ui/react';
-// import { reviewsData } from './Dashboarddata';
-// import { Bar } from 'react-chartjs-2'; // Import Bar from react-chartjs-2
+import { DeleteIcon } from '@chakra-ui/icons';
+import { Box , Button, Flex, Heading, Text} from '@chakra-ui/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 
 
 const Dashboard = () => {
-  //  // ... your existing code ...
-  //  const reviewsPerDay = reviewsData.reduce((acc, review) => {
-  //   const date = review.date;
-  //   acc[date] = (acc[date] || 0) + 1;
-  //   return acc;
-  // }, {});
+  const [review, setReview] = useState([]);
 
-  // // Calculate the average rating
-  // const totalRatings = reviewsData.reduce((acc, review) => acc + review.rating, 0);
-  // const averageRating = (totalRatings / reviewsData.length).toFixed(2);
+  const getReviewData = async()=>{
+    try {
+       axios.get(`http://localhost:3500/api/review`)
+      .then((res)=>{
+        setReview(res.data.result);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // // Create data for the chart
-  // const chartData = {
-  //   labels: Object.keys(reviewsPerDay),
-  //   datasets: [
-  //     {
-  //       label: 'Reviews Added Per Day',
-  //       data: Object.values(reviewsPerDay),
-  //       backgroundColor: 'rgba(75, 192, 192, 0.2)', // Customize the chart's appearance
-  //       borderColor: 'rgba(75, 192, 192, 1)', // Customize the chart's appearance
-  //       borderWidth: 1, // Customize the chart's appearance
-  //     },
-  //   ],
-  // };
+  // let revId = review._id;
+  const deleteReviewData = async(id)=>{
+    try {
+       axios.delete(`http://localhost:3500/api/review/deleteReview/${id}`)
+      .then((res)=>{
+        alert("Successfully Deleted");
+        window.location.reload();
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-  // // Define options for the chart (customize as needed)
-  // const chartOptions = {
-  //   scales: {
-  //     y: {
-  //       type: 'linear',
-  //       beginAtZero: true,
-  //     },
-  //   },
-  // };
+    console.log(review);
+    useEffect(()=>{
+      getReviewData();
+    },[]);
 
-  // return (
-  //   <Box p={4}>
-  //     <Text fontSize="xl" fontWeight="bold" mb={4}>
-  //       Dashboard
-  //     </Text>
-  //     <Box bg="white" p={4} boxShadow="md" borderRadius="md">
-  //       <Text fontSize="lg" fontWeight="bold" mb={2}>
-  //         Reviews Added Per Day:
-  //       </Text>
-  //       <Bar data={chartData} options={chartOptions} /> {/* Render the Bar chart */}
-  //     </Box>
-  //     {/* ... rest of your code ... */}
-  //   </Box>
-  // );
+    let sum = 0;
+
+    for(let i=0;i<review.length;i++){
+
+      sum = sum + review[i].rating;
+    }
+     let total = review.length;
+    let avgRating =  sum/total;
+
+    // console.log( review);
+
+    let numOfRev =0;
+    let currentDate = new Date().getDate();
+    // console.log(currentDate);
+    for(let i=0;i<review.length;i++){
+      if(review[i].createdAt == currentDate ){
+        numOfRev++;
+      }
+    }
+// console.log(new Date().getDate());
+
+  return (
+    <Box p={4} mt={"100px"} pb={"200px"}>
+      <Text fontSize="4xl" fontWeight="bold" mb={4}>
+        Dashboard
+      </Text>
+     
+      <Flex m={"auto"} w={"51%"}  justifyContent={"space-around"} alignItems={"baseline"}>
+      
+      <Flex gap={2} justifyContent={"space-around"} alignItems={"baseline"} >
+      <Box boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" width={"40px"} height={"200px"} border={"3px solid rgba(168, 242, 210, 0.8)"} ></Box>
+      <Text fontSize="lg" fontWeight="bold" mb={2}>
+          Reviews Added Per Day : {numOfRev}
+        </Text>
+      </Flex>
+
+
+        <Flex  gap={2} justifyContent={"space-around"} alignItems={"baseline"} >
+      <Box boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" width={"40px"} height={"100px"} border={"3px solid rgba(168, 242, 210, 0.8)"} ></Box>
+      <Text fontSize="lg" fontWeight="bold" mb={2}>
+          Average Ratings Per Day : {avgRating.toFixed(2)}
+        </Text>
+        </Flex>
+      </Flex>
+      
+      
+      <Box  p={4} boxShadow="md" borderRadius="md">
+         
+        <Box 
+         maxH="300px" 
+         overflowY="auto" 
+         p="2" 
+         m={"auto"}
+         mt={19}
+         h={"300px"} w={"60%"}>
+            <Heading mb={4}>All Book's Reviews</Heading>
+          {review.map((el)=>{
+            return (
+              <Box  w={"90%"} fontSize={20} m={"auto"} mt={3}  border={"0px solid blue"}>
+               <Text p={4} w={"100%"} textAlign={"left"} fontFamily={"Fredoka"}  border={"2px solid rgba(168, 242, 210, 0.8)"} boxShadow={"rgba(168, 242, 210, 0.8) 2.4px 2.4px 3.2px"}>
+                  <Flex justify={"space-between"}>
+                  <Flex justifyContent={"space-between"} w={"70%"}>
+                      <Text>{el.comment}</Text>
+                      <Text>Ratings: {el.rating}</Text>
+                    </Flex>
+                      <Button onClick={()=>deleteReviewData(el._id)}><DeleteIcon color={"red"} /></Button>
+
+                  </Flex>
+               </Text>
+                </Box>
+
+            )
+          })}
+        </Box>
+      </Box>
+      
+          </Box>
+  );
 }
 
 export default Dashboard;

@@ -1,18 +1,30 @@
 import React, { useState } from 'react'
-import { Rating } from 'react-simple-star-rating'
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import "./StarRating.css";
 
-const StarRating = () => {
-
-    const [ratingValue, setRatingValue] = useState(1)
-  
-  const handleRating = (rate) => {
-    setRatingValue(rate)
-
+const StarRating = ({avgRating}) => {
+  console.log(Math.ceil(avgRating));
+  let rat = Math.ceil(avgRating);
+  const [rating, setRating] = useState(4);
+  const [hover, setHover] = useState(0);
   return (
-    <Rating fillIcon={<MdFavorite size={50} />} />
-   
-  )
-}
-}
+    <div className="star-rating">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            type="button"
+            key={index}
+            className={index <= (hover || rating) ? "on" : "off"}
+            onClick={() => setRating(index)}
+            onMouseEnter={() => setHover(index)}
+            onMouseLeave={() => setHover(rating)}
+          >
+            <span className="star">&#9733;</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 export default StarRating;

@@ -1,4 +1,6 @@
 const BookModel = require("../Models/book.model");
+const ReviewModel = require("../Models/review.model");
+const UserModel = require("../Models/user.model");
 
 const getBookData = async(req,res)=>{
     try {
@@ -12,9 +14,12 @@ const getBookData = async(req,res)=>{
 
 const getSpecificBookData = async(req,res)=>{
     try {
-        console.log(req.params);
+        // console.log(req.params);
         let data = await BookModel.findById(req.params.id);
-        res.send({result: data});
+        let review = await ReviewModel.find({bookId: req.params.id })
+    
+
+        res.send({bookData: data, reviews: review});
     } catch (error) {
         res.send(error.message);
         

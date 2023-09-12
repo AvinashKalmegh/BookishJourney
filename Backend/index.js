@@ -3,6 +3,7 @@ const main = require("./Config/db");
 const BookRouter = require("./Routes/book.route");
 const ReviewRouter = require("./Routes/review.route");
 const UserRouter = require("./Routes/user.route");
+const cors = require("cors");
 const authentication = require("./Middlewares/authentication");
 require("dotenv").config();
 const PORT = 3500 || process.env.PORT;
@@ -10,6 +11,7 @@ const PORT = 3500 || process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 
 app.get("/",(req,res)=>{
@@ -17,6 +19,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/api/user",UserRouter);
+// app.use(authentication)
 app.use("/api/book",BookRouter);
 app.use("/api/review",ReviewRouter);
 

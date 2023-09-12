@@ -19,7 +19,7 @@ const signup = async(req, res)=>{
             const newUser = UserModel(payload);
             await newUser.save();
 
-            res.send({result: "Registration successful"});
+            res.send({result: "Registration successful",name:payload.name});
         }
     } catch (error) {
         res.send(error.message);

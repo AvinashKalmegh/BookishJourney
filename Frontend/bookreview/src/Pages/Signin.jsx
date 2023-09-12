@@ -17,11 +17,38 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { signin } from "../Redux/Authentication/action";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Signin = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    // console.log(location.state);
+    let userData = { email, password };
+    dispatch(signin (userData)).then(() => {
+      if(location.state == null){
+        navigate("/");
+      }
+      else{
+
+        navigate(location.state, { replace: true });
+      }
+    });
+    // redirect the user once the login is successfull
+  };
+
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -58,7 +85,7 @@ const Signin = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="email" placeholder="email address" />
+                  <Input type="email" placeholder="email address" value={email} onChange={(e)=>setEmail(e.target.value)} />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -71,6 +98,7 @@ const Signin = () => {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    value={password} onChange={(e)=>setPassword(e.target.value)}
                   />
                   <InputRightElement width="4.5rem">
                     <Button h="1.75rem" size="sm" onClick={handleShowClick}>
@@ -88,6 +116,7 @@ const Signin = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
+                onClick={loginHandler}
               >
                 Login
               </Button>
