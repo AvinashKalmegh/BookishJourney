@@ -42,11 +42,11 @@ export const BookCard = ({ book }) => {
 
             {isDetail === "/" ?  <CardFooter>
                 <ButtonGroup spacing='2'>
-                    <Link to={`/books/${book.id}/edit`}>
+                    {/* <Link to={`/books/${book.id}/edit`}> */}
                         <Button variant='solid' backgroundColor="rgba(117, 250, 181, 0.8)">
                             Edit Book
                         </Button>
-                    </Link>
+                    {/* </Link> */}
                     <Link to={`/books/${book.id}`}>
 
                 <Button variant='ghost' colorScheme='blue'>

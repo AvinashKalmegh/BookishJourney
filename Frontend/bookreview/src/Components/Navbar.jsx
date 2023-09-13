@@ -20,12 +20,15 @@ import {
   InputLeftElement,
   Input,
   InputRightAddon,
+  Hide,
+  Show,
 } from '@chakra-ui/react';
-import { MoonIcon, Search2Icon, SunIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, MoonIcon, Search2Icon, SunIcon } from '@chakra-ui/icons';
 import "./Navbar.css";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import MenuDrawer from './MenuDrawer';
 
 interface Props {
   children: React.ReactNode
@@ -55,49 +58,54 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
 
-  let istoken = JSON.parse(localStorage.getItem("token"));
-  
-  
-  const logout= ()=>{
+  let istoken = JSON.parse(localStorage.getItem("token")) || null;
+
+
+  const logout = () => {
     localStorage.removeItem("token");
     navigate("/signin")
   }
 
   return (
-    
-      <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} po>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+
+    <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} po>
+      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <Link to="/">
           <Box className='logo' fontFamily={"Fredoka"} fontWeight={"bold"} fontSize={"4xl"}>Bookish Journey</Box>
         </Link>
-        <InputGroup w={"30%"} borderRadius={5} size="sm">
-        <InputLeftElement
-          pointerEvents="none"
-          children={<Search2Icon color="gray.600" />}
-        />
-        <Input type="text" placeholder="Search..." border="1px solid #949494" />
-        <InputRightAddon
-          p={0}
-          border="none"
-        >
-          <Button size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
-            Search
-          </Button>
-        </InputRightAddon>
-      </InputGroup>
-          <Flex  alignItems={'center'} border={"0px solid red"} w={"33%"} justifyContent={"space-around"}  fontWeight={"450"}>
-          
-          
-          <Link to="/">
-            <Text className='menu'>Home</Text>
-          </Link>
-          <Link to={"/dashboard"}>
-            <Text className='menu'>Dashboard</Text>
-          </Link>
-          {istoken ? <></> : <Link to={"/signin"}>
-            <Text className='menu'>Signin</Text>
-          </Link>}
-          
+        <Hide breakpoint='(max-width : 901px)'>
+          <InputGroup w={"30%"} borderRadius={5} size="sm">
+            <InputLeftElement
+              pointerEvents="none"
+              children={<Search2Icon color="gray.600" />}
+            />
+            <Input type="text" placeholder="Search..." border="1px solid #949494" />
+            <InputRightAddon
+              p={0}
+              border="none"
+            >
+              <Button size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
+                Search
+              </Button>
+            </InputRightAddon>
+          </InputGroup>
+
+
+          <Flex alignItems={'center'} border={"0px solid red"} w={"33%"} justifyContent={"space-around"} fontWeight={"450"}>
+
+
+            <Link to="/">
+              <Text className='menu'>Home</Text>
+            </Link>
+            <Link to={"/dashboard"}>
+              <Text className='menu'>Dashboard</Text>
+            </Link>
+            {istoken !== null ? <></> : <Link to={"/signin"}>
+              <Text className='menu'>Signin</Text>
+            </Link>}
+
+
+
             <Stack direction={'row'} spacing={7}>
               <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -131,14 +139,18 @@ export default function Navbar() {
                   <MenuDivider />
                   <MenuItem>Your Servers</MenuItem>
                   <MenuItem>Account Settings</MenuItem>
-                  {istoken ? <MenuItem onClick={logout}>Logout</MenuItem> : <></> }
-                  
+                  {istoken !== null ? <MenuItem onClick={logout}>Logout</MenuItem> : <></>}
+
                 </MenuList>
               </Menu>
             </Stack>
           </Flex>
-        </Flex>
-      </Box>
-    
+        </Hide>
+        <Show breakpoint='(max-width : 900px)'>
+          <MenuDrawer/>
+          </Show>
+      </Flex>
+    </Box>
+
   )
 }

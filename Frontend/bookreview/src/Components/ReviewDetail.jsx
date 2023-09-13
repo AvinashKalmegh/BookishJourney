@@ -7,9 +7,7 @@ import StarRating from './StarRating';
 
 
 const ReviewDetail = ({book,review}) => {
-// let bookData = book.bookData;
-// let title 
-// console.log(book);
+
 let avgRating = 0;
 if(review.length>1){
   let sum = 0;
@@ -28,7 +26,7 @@ avgRating = review[0].rating;
 }
    
 
-    // console.log((avgRating.toFixed(2)));
+    
 
   return (
     <Card
@@ -50,12 +48,6 @@ avgRating = review[0].rating;
       <Heading mt={4} size="md">
         Author : {book.author}
       </Heading>
-      {/* <Heading mt={2} size="md">
-        Category : {book.category}
-      </Heading>
-      <Heading mt={2} size="md">
-        Year : {book.release_year}
-      </Heading> */}
       <Text fontWeight={600} mt={2} size="2xl" w={"60%"}>
         Description : A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.
       </Text>
