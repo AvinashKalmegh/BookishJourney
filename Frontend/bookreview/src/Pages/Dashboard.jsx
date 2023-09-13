@@ -140,9 +140,9 @@ const Dashboard = () => {
         Dashboard
       </Text>
      
-      <Flex m={"auto"} w={"51%"}  justifyContent={"space-around"} alignItems={"baseline"}>
+      <Flex m={"auto"} flexDirection={{base:"column", md:"column",lg:"row"}}  w={{base:"100%", md:"70%",lg:"51%"}}  justifyContent={{base:"center",lg:"space-around"}} alignItems={{base:"center",lg:"baseline"}}>
       
-      <Flex gap={2} justifyContent={"space-around"} alignItems={"baseline"} >
+      <Flex gap={2} flexDirection={{base:"column", md:"column",lg:"row"}} justifyContent={{base:"center",lg:"space-around"}} alignItems={{base:"center",lg:"baseline"}} >
       <Box boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" width={"40px"} height={"200px"} border={"3px solid rgba(168, 242, 210, 0.8)"} ></Box>
       <Text fontSize="lg" fontWeight="bold" mb={2}>
           Reviews Added Per Day : {numOfRev}
@@ -150,7 +150,7 @@ const Dashboard = () => {
       </Flex>
 
 
-        <Flex  gap={2} justifyContent={"space-around"} alignItems={"baseline"} >
+        <Flex flexDirection={{base:"column", md:"column",lg:"row"}}  gap={2} justifyContent={"space-around"} alignItems={{base:"center",lg:"baseline"}} >
       <Box boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" width={"40px"} height={"100px"} border={"3px solid rgba(168, 242, 210, 0.8)"} ></Box>
       <Text fontSize="lg" fontWeight="bold" mb={2}>
           Average Ratings : {avgRating.toFixed(2)}
@@ -159,7 +159,7 @@ const Dashboard = () => {
       </Flex>
       
       
-      <Box w={"80%"} m={"auto"} mt={8} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
+      <Box w={{base:"100%",lg:"80%"}} m={"auto"} mt={8} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
          
         <Box 
          maxH="500px" 
@@ -167,18 +167,18 @@ const Dashboard = () => {
          p="2" 
          m={"auto"}
          mt={19}
-         h={"500px"} w={"60%"}>
+         h={"500px"} w={{base:"100%",lg:"60%"}}>
             <Heading mb={4}>All Book's Reviews</Heading>
           {review.length > 0 && review.map((el)=>{
             return (
-              <Box  w={"90%"} fontSize={20} m={"auto"} mt={3}  border={"0px solid blue"}>
+              <Box  w={{base:"100%",lg:"90%"}} fontSize={20} m={"auto"} mt={3}  border={"0px solid blue"}>
                <Text p={4} w={"100%"} textAlign={"left"} fontFamily={"Fredoka"}  border={"2px solid rgba(168, 242, 210, 0.8)"} boxShadow={"rgba(168, 242, 210, 0.8) 2.4px 2.4px 3.2px"}>
                   <Flex justify={"space-between"}>
-                  <Flex justifyContent={"space-between"} w={"70%"}>
+                  <Flex justifyContent={"space-between"} w={{base:"100%",lg:"70%"}}>
                       <Text>{el.comment}</Text>
                       <Text>Ratings: {el.rating}</Text>
                     </Flex>
-                      <Button onClick={()=>deleteReviewData(el._id)}><DeleteIcon color={"red"} /></Button>
+                      <Button onClick={()=>deleteReviewData(el._id)}><DeleteIcon color={"red"}  /></Button>
 
                   </Flex>
                </Text>
@@ -188,9 +188,9 @@ const Dashboard = () => {
         </Box>
       </Box>
 
-      <Box w={"70%"} m={"auto"} mt={10} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
+      <Box w={{base:"100%",lg:"70%"}} m={"auto"} mt={10} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
       <Heading mb={4} >Add Books</Heading>
-      <Box w={"60%"} m={"auto"} >
+      <Box w={{base:"100%",lg:"60%"}} m={"auto"} >
         <FormControl>
         <Input mt={2} border={"2px solid rgba(168, 242, 210, 0.8)"} type='url' placeholder='Enter Image Url' value={url} onChange={(e)=>setUrl(e.target.value)} />
       <Input mt={2} border={"2px solid rgba(168, 242, 210, 0.8)"} type='text' placeholder='Enter Book Title' value={title} onChange={(e)=>setTitle(e.target.value)} />
@@ -203,10 +203,10 @@ const Dashboard = () => {
       
       </Box>
 
-      <Box w={"70%"} m={"auto"} mt={10} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
+      <Box w={{base:"100%",lg:"70%"}} m={"auto"} mt={10} border={"2px solid rgba(168, 242, 210, 0.8)"}  p={4} boxShadow="md" borderRadius="md">
       <Heading mb={4} >List of Books</Heading>
       {book.length > 0 && book.map((el,index)=>{
-        return <Box mt={5} w={"60%"} m={"auto"} border={"2px solid rgba(168, 242, 210, 0.8)"} >
+        return <Box mt={5} w={{base:"100%",lg:"70%"}} m={"auto"} border={"2px solid rgba(168, 242, 210, 0.8)"} >
           
           <Flex p={2} alignItems={"center"} justifyContent={"space-between"} textAlign={"left"}>
             <Text fontFamily={"Fredoka"} fontWeight={500} >{index+1}.</Text>

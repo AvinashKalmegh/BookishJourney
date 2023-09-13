@@ -68,10 +68,10 @@ export default function Navbar() {
 
   return (
 
-    <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} po>
+    <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <Link to="/">
-          <Box className='logo' fontFamily={"Fredoka"} fontWeight={"bold"} fontSize={"4xl"}>Bookish Journey</Box>
+          <Box className='logo' fontFamily={"Fredoka"} fontWeight={"bold"} fontSize={{base:"2xl",md:"2xl",lg:"4xl"}}>Bookish Journey</Box>
         </Link>
         <Hide breakpoint='(max-width : 901px)'>
           <InputGroup w={"30%"} borderRadius={5} size="sm">

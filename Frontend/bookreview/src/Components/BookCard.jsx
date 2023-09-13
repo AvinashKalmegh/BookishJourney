@@ -43,7 +43,7 @@ export const BookCard = ({ book }) => {
             {isDetail === "/" ?  <CardFooter>
                 <ButtonGroup spacing='2'>
                     {/* <Link to={`/books/${book.id}/edit`}> */}
-                        <Button variant='solid' backgroundColor="rgba(117, 250, 181, 0.8)">
+                        <Button onClick={()=>alert("It is under construction !!!")} variant='solid' backgroundColor="rgba(117, 250, 181, 0.8)">
                             Edit Book
                         </Button>
                     {/* </Link> */}
@@ -59,11 +59,11 @@ export const BookCard = ({ book }) => {
             
             <CardFooter justifyContent={"center"}>
 
-             <Link to={`/books/${book.id}/edit`}>
-                        <Button variant='solid' backgroundColor="rgba(117, 250, 181, 0.8)">
+             {/* <Link to={`/books/${book.id}/edit`}> */}
+                        <Button onClick={()=>alert("It is under construction !!!")} variant='solid' backgroundColor="rgba(117, 250, 181, 0.8)">
                             Edit Book
                         </Button>
-                    </Link>
+                    {/* </Link> */}
             </CardFooter> }
         </Card>
 
