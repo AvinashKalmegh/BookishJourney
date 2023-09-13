@@ -26,7 +26,7 @@ export const BookCard = ({ book }) => {
             </CardBody> :
             
             <CardBody>
-            <Link to={`/books/${book.id}`}>
+            
                 <Image
                     src={book.url}
                     alt='Green double couch with wooden legs'
@@ -34,7 +34,7 @@ export const BookCard = ({ book }) => {
                     margin={"auto"}
                     h={"100%"}
                 />
-            </Link>
+            
         </CardBody>}
             
           
@@ -47,7 +47,7 @@ export const BookCard = ({ book }) => {
                             Edit Book
                         </Button>
                     {/* </Link> */}
-                    <Link to={`/books/${book.id}`}>
+                    <Link to={`/books/${book._id}`}>
 
                 <Button variant='ghost' colorScheme='blue'>
                         View Details
