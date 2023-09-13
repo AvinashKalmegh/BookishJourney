@@ -119,7 +119,7 @@ const Signup = () => {
                 width="full"
                 onClick={signupHandler}
               >
-                Login
+                Sign up
               </Button>
             </Stack>
           </form>

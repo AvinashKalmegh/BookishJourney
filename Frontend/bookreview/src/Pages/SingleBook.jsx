@@ -21,7 +21,7 @@ const SingleBook = () => {
 
 const getPertData = async()=>{
   try {
-     axios.get(`http://localhost:3500/api/book/${id}`)
+     axios.get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`)
     .then((res)=>{
       setBook(res.data.bookData);
       setReview(res.data.reviews);

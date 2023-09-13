@@ -48,7 +48,7 @@ const deleteBookData = async(req,res)=>{
 
 const updateBookData = async(req,res)=>{
     try {
-        console.log(req.body, req.params.id);
+        // console.log(req.body, req.params.id);
         let data = await BookModel.findByIdAndUpdate(req.params.id,req.body);
 
         res.send({result: "Data successfully updated"});
@@ -57,6 +57,21 @@ const updateBookData = async(req,res)=>{
     }
 }
 
+const searchBookData = async(req,res)=>{
+    // res.send("hii")
+    try {
+        let result = await BookModel.find({
+            "$or":[
+                {title : {$regex : req.params.key}},
+                {author : {$regex : req.params.key}}
+            ]
+        })
+
+        res.send(result);
+    } catch (error) {
+        res.send(error.message);
+    }
+}
 
 
-module.exports = {getBookData, getSpecificBookData, postBookData, deleteBookData,updateBookData};
+module.exports = {getBookData, getSpecificBookData, postBookData, deleteBookData,updateBookData,searchBookData};

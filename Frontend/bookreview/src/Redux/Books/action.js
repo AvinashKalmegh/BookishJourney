@@ -4,6 +4,7 @@ import {
   GET_BOOKS_FAILURE,
   GET_BOOKS_REQUEST,
   GET_BOOKS_SUCCESS,
+  GET_SEARCH_SUCCESS,
 } from "./actionTypes";
 
 const getBooksRequestAction = () => {
@@ -12,6 +13,10 @@ const getBooksRequestAction = () => {
 
 const getBooksSuccessAction = (payload) => {
   return { type: GET_BOOKS_SUCCESS, payload };
+};
+
+const getSearchSuccessAction = (payload) => {
+  return { type: GET_SEARCH_SUCCESS, payload };
 };
 
 const getBooksFailureAction = () => {
@@ -28,9 +33,24 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`http://localhost:3500/api/book/`)
+      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
+      })
+      .catch((err) => {
+        dispatch(getBooksFailureAction());
+      });
+  };
+
+  export const getSearch =
+  (text) =>
+  (dispatch) => {
+    dispatch(getBooksRequestAction());
+
+    axios
+      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/search/${text}`)
+      .then((res) => {
+        dispatch(getSearchSuccessAction(res.data));
       })
       .catch((err) => {
         dispatch(getBooksFailureAction());
@@ -43,7 +63,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`http://localhost:3500/api/book/${id}`)
+      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
       })
@@ -53,7 +73,7 @@ export const getBooks =
   };
 
 export const editBook = (id, bookData) => (dispatch) => {
-  return axios.patch(`http://localhost:3500/api/book/${id}`, bookData).then(() => {
+  return axios.patch(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`, bookData).then(() => {
     dispatch(editBookSuccess());
   });
 };

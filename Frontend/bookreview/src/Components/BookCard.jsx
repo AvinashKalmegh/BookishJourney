@@ -8,7 +8,7 @@ export const BookCard = ({ book }) => {
     
     return (
 
-        <Card className="bookCard" border={"3px solid rgba(168, 242, 210, 0.8)"}  maxW='sm' boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" >
+        <Card className="bookCard" border={"3px solid rgba(168, 242, 210, 0.8)"}  maxW='sm' boxShadow="rgba(1   68, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" >
             
             {isDetail === "/" ?  <CardBody>
                 <Link to={`/books/${book._id}`}>

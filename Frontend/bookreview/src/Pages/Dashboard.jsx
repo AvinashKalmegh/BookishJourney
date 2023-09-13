@@ -20,7 +20,7 @@ const Dashboard = () => {
     try {
       
    await axios
-    .get(`http://localhost:3500/api/book/`)
+    .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/`)
     .then((res) => {
        setBook(res.data.result);
     })
@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   const getReviewData = async()=>{
     try {
-       axios.get(`http://localhost:3500/api/review`)
+       axios.get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/review`)
       .then((res)=>{
         setReview(res.data.result);
       })
@@ -46,7 +46,7 @@ const Dashboard = () => {
   // let revId = review._id;
   const deleteReviewData = async(id)=>{
     try {
-       axios.delete(`http://localhost:3500/api/review/deleteReview/${id}`)
+       axios.delete(`https://tiny-rose-cockroach-wrap.cyclic.app/api/review/deleteReview/${id}`)
       .then((res)=>{
         alert("Successfully Deleted");
         window.location.reload();
@@ -72,7 +72,7 @@ const Dashboard = () => {
           desc
   
         }
-         axios.post(`http://localhost:3500/api/book/addBook`,bookObj)
+         axios.post(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/addBook`,bookObj)
         .then((res)=>{
           alert("Successfully Added The Book");
           setUrl("");
@@ -93,7 +93,7 @@ const Dashboard = () => {
 
   const deleteBookData = async(Bookid)=>{
     try {
-       axios.delete(`http://localhost:3500/api/book/${Bookid}`)
+       axios.delete(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${Bookid}`)
       .then((res)=>{
         alert("Successfully Deleted");
         window.location.reload();

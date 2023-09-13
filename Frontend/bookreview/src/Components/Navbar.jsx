@@ -26,9 +26,12 @@ import {
 import { HamburgerIcon, MoonIcon, Search2Icon, SunIcon } from '@chakra-ui/icons';
 import "./Navbar.css";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import MenuDrawer from './MenuDrawer';
+import axios from 'axios';
+import { getBooks, getSearch } from '../Redux/Books/action';
+import Search from './Search';
 
 interface Props {
   children: React.ReactNode
@@ -57,15 +60,30 @@ export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate();
+  const books = useSelector((store) => store.bookReducer.books);
+
+  const [search, setSearch] = useState("");
 
   let istoken = JSON.parse(localStorage.getItem("token")) || null;
 
-
+const dispatch = useDispatch()
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/signin")
   }
 
+  const [searcharr, setSearchArr] = useState([]);
+ const handleSearch = ()=>{
+  let data = books.filter((el)=>{
+    return el.title.toLowerCase().includes(search.toLocaleLowerCase());
+  })
+  // arr.push(data)
+  setSearchArr(data);
+  
+}
+console.log(searcharr);
+
+  
   return (
 
     <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} >
@@ -73,18 +91,21 @@ export default function Navbar() {
         <Link to="/">
           <Box className='logo' fontFamily={"Fredoka"} fontWeight={"bold"} fontSize={{base:"2xl",md:"2xl",lg:"4xl"}}>Bookish Journey</Box>
         </Link>
+        {/* {searcharr.length >0 ? <Search data={searcharr}/> : <></>} */}
+        
         <Hide breakpoint='(max-width : 901px)'>
           <InputGroup w={"30%"} borderRadius={5} size="sm">
             <InputLeftElement
               pointerEvents="none"
               children={<Search2Icon color="gray.600" />}
             />
-            <Input type="text" placeholder="Search..." border="1px solid #949494" />
+            <Input value={search} onChange={(e)=>setSearch(e.target.value)} type="text" placeholder="Search..." border="1px solid #949494" />
+
             <InputRightAddon
               p={0}
               border="none"
             >
-              <Button size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
+              <Button onClick={handleSearch} size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
                 Search
               </Button>
             </InputRightAddon>
