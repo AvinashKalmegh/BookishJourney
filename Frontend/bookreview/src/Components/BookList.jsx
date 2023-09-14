@@ -30,10 +30,22 @@ export const BooksList = () => {
 
 const DivWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-template-columns: repeat(4,1fr);
   grid-gap: 20px;
   width: 90%;
   margin: auto;
+
+  @media screen and (max-width : 609px){
+    grid-template-columns: repeat(1,1fr);
+  }
+
+  @media screen and (min-width : 609px) and (max-width : 869px){
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  @media screen and (min-width : 870px) and (max-width : 1314px){
+    grid-template-columns: repeat(3,1fr);
+  }
 `;
 
 // conditional css

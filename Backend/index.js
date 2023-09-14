@@ -6,12 +6,13 @@ const UserRouter = require("./Routes/user.route");
 const cors = require("cors");
 const authentication = require("./Middlewares/authentication");
 require("dotenv").config();
+
 const PORT = 3500 || process.env.PORT;
 
 const app = express();
+app.use(cors());
 
 app.use(express.json());
-app.use(cors());
 
 
 app.get("/",(req,res)=>{

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { signin } from "../Redux/Authentication/action";
 
@@ -25,6 +25,9 @@ const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Signin = () => {
+
+  const istoken = useSelector((store) => store.authReducer.token);
+  console.log(istoken);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,18 +38,55 @@ const Signin = () => {
   const loginHandler = (e) => {
     e.preventDefault();
     // console.log(location.state);
-    let userData = { email, password };
-    dispatch(signin (userData)).then(() => {
-      if(location.state == null){
-        navigate("/");
-      }
-      else{
+    if(!email || !password){
+      alert("Please fill all the fields")
+    }
+    else{
+      let userData = { email, password };
+      dispatch(signin (userData))
+      // .then(() => {
+          // if(istoken){
+            
+          //   if(location.state == null){
+          //     localStorage.setItem("token",JSON.stringify(istoken));
+          //     navigate("/");
+          //   }
+          //   else{
+          //     localStorage.setItem("token",JSON.stringify(istoken));
+      
+          //     navigate(location.state, { replace: true });
+          //   }
+          // }
+          // else{
+          //   alert("Wrong Credentials !!!")
+          // }
 
-        navigate(location.state, { replace: true });
-      }
-    });
+          
+      //   });
+      // }
+
+     
     // redirect the user once the login is successfull
   };
+}
+
+useEffect(()=>{
+    if(istoken == "Signin successful"){
+          
+            if(location.state == null){
+              localStorage.setItem("token",JSON.stringify(istoken));
+              navigate("/");
+            }
+            else{
+              navigate(location.state, { replace: true });
+            }
+    }
+    else if(istoken == "Please signup first"){
+      alert("Wrong Credentials !!!")
+      return;
+    }
+
+},[istoken])
 
 
   const [showPassword, setShowPassword] = useState(false);

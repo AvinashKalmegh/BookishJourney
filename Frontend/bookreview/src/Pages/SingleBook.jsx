@@ -21,7 +21,7 @@ const SingleBook = () => {
 
 const getPertData = async()=>{
   try {
-     axios.get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`)
+     axios.get(`http://localhost:3500/api/book/${id}`)
     .then((res)=>{
       setBook(res.data.bookData);
       setReview(res.data.reviews);
@@ -52,7 +52,7 @@ const getPertData = async()=>{
 
   return (
     <>
-    <Flex  gap={2} w={"95%"} m={"auto"} mt={"120px"}>
+    <Flex flexDirection={{base:"column",md:"row", lg:"row"}} justifyContent={{base:"center",md:"center",lg:"center"}} alignItems={{base:"center",md:"normal",lg:"normal"}}  gap={2} w={"95%"} m={"auto"} mt={"120px"}>
       <BookCard book={book} />
       <ReviewDetail book={book} review={review}/>
     </Flex>

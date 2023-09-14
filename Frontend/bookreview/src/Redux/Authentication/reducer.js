@@ -4,6 +4,7 @@ import { USER_SIGNIN_FAILURE, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIG
   const initialState = {
     isAuth: false,
     token: "",
+    signupStatus: "false",
     isLoading: false,
     isError: false,
   };
@@ -15,7 +16,8 @@ import { USER_SIGNIN_FAILURE, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIG
       case USER_SIGNIN_SUCCESS:
         return { ...state, isLoading: false, isAuth: true, token: payload };
         case USER_SIGNUP_SUCCESS:
-          return { ...state, isLoading: false, isAuth: true};
+          console.log(payload);
+          return { ...state, isLoading: false, isAuth: true, signupStatus: payload };
       case USER_SIGNIN_FAILURE:
         return { ...state, isLoading: false, isError: true };
       default:

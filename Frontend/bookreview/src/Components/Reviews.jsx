@@ -14,10 +14,10 @@ import { DeleteIcon } from '@chakra-ui/icons';
 const Reviews = ({ review, book }) => {
   //  let reviewData = review.reviews;
   const { id } = useParams();
-  console.log(book._id);
+  // console.log(book._id);
   const getPertData = async (id) => {
     try {
-      axios.get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`)
+      axios.get(`http://localhost:3500/api/book/${id}`)
         .then((res) => {
 
         })
@@ -51,7 +51,7 @@ const Reviews = ({ review, book }) => {
           bookId: book._id
         }
         // console.log(obj)
-        await axios.post("https://tiny-rose-cockroach-wrap.cyclic.app/api/review/addReview", obj)
+        await axios.post("http://localhost:3500/api/review/addReview", obj)
           .then(() => window.location.reload())
           .catch((err) => console.log(err))
 
@@ -66,8 +66,8 @@ const Reviews = ({ review, book }) => {
 
   return (
     <Box className='reviews' >
-      <Box p={2} pt={4} pl={8} h={"300px"} w={"40%"} border={"0px solid black"}>
-        <Text fontSize={20} fontWeight={"bold"}>"Your voice matters! Share your experience, inspire others, and help us grow together. Leave a review today!"</Text>
+      <Box p={2} pt={4} pl={{base:"2",lg:"8"}} h={"300px"}  w={{base:"100%",lg:"40%"}} border={"0px solid black"}>
+        <Text id='voice' fontSize={20} fontWeight={"bold"}>"Your voice matters! Share your experience, inspire others, and help us grow together. Leave a review today!"</Text>
         <div className="star-rating">
           {[...Array(5)].map((star, index) => {
             index += 1;
@@ -89,11 +89,15 @@ const Reviews = ({ review, book }) => {
         <Button onClick={commentHandler} backgroundColor={"rgba(117, 250, 181, 0.8)"}>Add Review</Button>
       </Box>
       <Box
-        maxH="300px"
-        overflowY="auto"
+        maxH={{lg:"300px"}}
+        overflowY={"auto"}
         p="2"
-        border="0px solid #ccc" h={"300px"} w={"60%"}>
-        <Heading mb={4}>See All the reviews...</Heading>
+        border="0px solid #ccc" 
+        h={"300px"} 
+        w={{base:"100%",lg:"60%"}}
+        mt={{base:"55px",lg:"0"}}
+        >
+        <Heading mb={4} fontSize={{base:"20",lg:"30"}}>See All the reviews...</Heading>
         {review.length > 0 && review.map((el) => {
           return (
             <Box w={"90%"} fontSize={20} m={"auto"} mt={3} border={"0px solid blue"}>

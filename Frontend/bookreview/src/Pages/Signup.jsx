@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Flex,
   Heading,
@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../Redux/Authentication/action";
 
 const CFaUserAlt = chakra(FaUserAlt);
@@ -25,26 +25,74 @@ const CFaLock = chakra(FaLock);
 
 const Signup = () => {
   
+  const status = useSelector((store) => store.authReducer.signupStatus);
+  console.log(status);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  // const location = useLocation();
-
-  const signupHandler = (e) => {
-    e.preventDefault();
-    let userData = { name, email, password };
-    dispatch(signup (userData)).then(() => {
-      alert("Signup Successful")
-      navigate("/signin");
-    });
-    // redirect the user once the login is successfull
-  };
-
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const location = useLocation();
+// console.log(status.result);
+
+
+  const signupHandler = (e) => {
+    e.preventDefault();
+    if(!name || !email || !password){
+      alert("Please fill all the fields")
+    }
+    else{
+
+      let userData = { name, email, password };
+      dispatch(signup(userData));
+        // console.log(status);
+      
+        
+    
+  
+        
+      
+    }
+      // console.log(res);
+    // redirect the user once the login is successfull
+  };
+
+//   const handle = ()=>{
+//     const signupHandler = (e) => {
+//       e.preventDefault();
+//       if(!name || !email || !password){
+//         alert("Please fill all the fields")
+//       }
+//       else{
+  
+//         let userData = { name, email, password };
+//         dispatch(signup(userData)).then(()=>{
+//           console.log(status);
+  
+//         })
+    
+//   }
+// }
+//   }
+
+
+useEffect(()=>{
+  if(status == "User already registered"){
+  
+    alert("User already registered");
+    
+     navigate("/signin");
+  }
+  if(status == "Registration successful"){
+            alert("Signup Successfull");
+          navigate("/signin");
+     }
+},[status])
+  
 
   return (
     <Flex
@@ -76,7 +124,7 @@ const Signup = () => {
                     pointerEvents="none"
                     children={<CFaUserAlt color="gray.300" />}
                   />
-                  <Input type="text" placeholder="First Name" value={name} onChange={(e)=>setName(e.target.value)} />
+                  <Input  type="text" placeholder="First Name" value={name} onChange={(e)=>setName(e.target.value)} />
                 </InputGroup>
               </FormControl>
               
@@ -117,7 +165,7 @@ const Signup = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
-                onClick={signupHandler}
+                onClick={(e)=>signupHandler(e)}
               >
                 Sign up
               </Button>

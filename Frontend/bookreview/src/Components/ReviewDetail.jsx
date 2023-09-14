@@ -36,7 +36,7 @@ avgRating = review[0].rating;
   className='bookCard'
   id='reviewdetail'
   border={"3px solid rgba(168, 242, 210, 0.8)"}   
-  boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset"
+  
   pl={5}
 >
  
@@ -48,7 +48,7 @@ avgRating = review[0].rating;
       <Heading mt={4} size="md">
         Author : {book.author}
       </Heading>
-      <Text fontWeight={600} mt={2} size="2xl" w={"60%"}>
+      <Text fontWeight={600} mt={2} size="2xl" w={{base:"%",sm:"80%",lg:"60%"}}>
         Description : A book is a medium for recording information in the form of writing or images, typically composed of many pages (made of papyrus, parchment, vellum, or paper) bound together and protected by a cover.
       </Text>
         <StarRating avgRating={avgRating}/>

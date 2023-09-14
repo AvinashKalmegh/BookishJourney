@@ -15,6 +15,7 @@ const signinSuccessAction = (payload) => {
 };
 
 const signupSuccessAction = (payload) => {
+  console.log(payload);
   return { type: USER_SIGNUP_SUCCESS, payload };
 };
 
@@ -28,10 +29,11 @@ export const signin = (userData) => (dispatch) => {
   dispatch(signinRequestAction());
 
   return axios
-    .post("https://tiny-rose-cockroach-wrap.cyclic.app/api/user/signin", userData)
+    .post("http://localhost:3500/api/user/signin", userData)
     .then((res) => {
-      localStorage.setItem("token",JSON.stringify(res.data.token));
-      dispatch(signinSuccessAction(res.data.token));
+      console.log(res.data);
+      localStorage.setItem("token",JSON.stringify(res.data.token))
+      dispatch(signinSuccessAction(res.data.result));
     })
     .catch((err) => {
       dispatch(signinFailureAction());
@@ -42,10 +44,10 @@ export const signup = (userData) => (dispatch) => {
   dispatch(signinRequestAction());
 
   return axios
-    .post("https://tiny-rose-cockroach-wrap.cyclic.app/api/user/signup", userData)
+    .post("http://localhost:3500/api/user/signup", userData)
     .then((res) => {
-      // console.log(res);
-      dispatch(signupSuccessAction(res));
+      console.log(res.data.result);
+      dispatch(signupSuccessAction(res.data.result));
     })
     .catch((err) => {
       dispatch(signinFailureAction());

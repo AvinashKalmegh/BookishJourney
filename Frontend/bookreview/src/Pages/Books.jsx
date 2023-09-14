@@ -7,7 +7,7 @@ import {Box, Heading, Image} from "@chakra-ui/react";
 const Books = () => {
   return (
     <div>
-        <Box w={"100%"} mt={"72px"} mb={"30px"}>
+        <Box w={"100%"} mt={{base:"120px",lg:"72px"}   } mb={"30px"}>
        
         <Image src="https://www.bookswagon.com/bannerimages/81_inr.jpg?v=1.9" />
         <Heading mt={"40px"} mb={"60px"} fontFamily={"Fredoka"} fontSize={"4xl"} fontWeight={550}>From bestsellers to hidden gems, we review them all.</Heading>

@@ -17,6 +17,8 @@ export const BookCard = ({ book }) => {
                         alt='Green double couch with wooden legs'
                         borderRadius='lg'
                         margin={"auto"}
+                        w={"100%"}
+                        h={"70%"}
                     />
                 </Link>
                 <Stack mt='6' spacing='3'>

@@ -66,27 +66,28 @@ export default function Navbar() {
 
   let istoken = JSON.parse(localStorage.getItem("token")) || null;
 
+
 const dispatch = useDispatch()
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/signin")
   }
 
-  const [searcharr, setSearchArr] = useState([]);
- const handleSearch = ()=>{
-  let data = books.filter((el)=>{
-    return el.title.toLowerCase().includes(search.toLocaleLowerCase());
-  })
-  // arr.push(data)
-  setSearchArr(data);
+//   const [searcharr, setSearchArr] = useState([]);
+//  const handleSearch = ()=>{
+//   let data = books.filter((el)=>{
+//     return el.title.toLowerCase().includes(search.toLocaleLowerCase());
+//   })
+//   // arr.push(data)
+//   setSearchArr(data);
   
-}
-console.log(searcharr);
+// }
+// console.log(searcharr);
 
   
   return (
-
-    <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')} px={4} >
+    <>
+    <Box className='nav' bg={useColorModeValue('gray.100', 'gray.900')}  >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <Link to="/">
           <Box className='logo' fontFamily={"Fredoka"} fontWeight={"bold"} fontSize={{base:"2xl",md:"2xl",lg:"4xl"}}>Bookish Journey</Box>
@@ -94,6 +95,7 @@ console.log(searcharr);
         {/* {searcharr.length >0 ? <Search data={searcharr}/> : <></>} */}
         
         <Hide breakpoint='(max-width : 901px)'>
+          
           <InputGroup w={"30%"} borderRadius={5} size="sm">
             <InputLeftElement
               pointerEvents="none"
@@ -105,9 +107,10 @@ console.log(searcharr);
               p={0}
               border="none"
             >
-              <Button onClick={handleSearch} size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
+              {/* <Button size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
                 Search
-              </Button>
+              </Button> */}
+              <Search searchInput = {search} />
             </InputRightAddon>
           </InputGroup>
 
@@ -167,11 +170,38 @@ console.log(searcharr);
             </Stack>
           </Flex>
         </Hide>
+        <Show below='md'>
+
+        <Button onClick={toggleColorMode}>
+                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              </Button>
+        </Show>
+
         <Show breakpoint='(max-width : 900px)'>
           <MenuDrawer/>
           </Show>
       </Flex>
+      
     </Box>
+    <Show below='md'> 
+        <InputGroup backgroundColor={"white"} position={"fixed"} m={"auto"} zIndex={2} top={"70px"}   w={"100%"} borderRadius={5} size="sm">
+            <InputLeftElement
+              pointerEvents="none"
+              children={<Search2Icon color="gray.600" />}
+            />
+            <Input value={search} onChange={(e)=>setSearch(e.target.value)} type="text" placeholder="Search..." border="1px solid #949494" />
 
+            <InputRightAddon
+              p={0}
+              border="none"
+            >
+              {/* <Button size="sm" borderLeftRadius={0} borderRightRadius={3.3} border="1px solid #949494">
+                Search
+              </Button> */}
+              <Search searchInput = {search} />
+            </InputRightAddon>
+          </InputGroup>
+          </Show>
+</>
   )
 }

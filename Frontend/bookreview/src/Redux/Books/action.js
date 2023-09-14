@@ -33,7 +33,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book`)
+      .get(`http://localhost:3500/api/book`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
       })
@@ -48,7 +48,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/search/${text}`)
+      .get(`http://localhost:3500/api/book/search/${text}`)
       .then((res) => {
         dispatch(getSearchSuccessAction(res.data));
       })
@@ -63,7 +63,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`)
+      .get(`http://localhost:3500/api/book/${id}`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
       })
@@ -73,7 +73,7 @@ export const getBooks =
   };
 
 export const editBook = (id, bookData) => (dispatch) => {
-  return axios.patch(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${id}`, bookData).then(() => {
+  return axios.patch(`http://localhost:3500/api/book/${id}`, bookData).then(() => {
     dispatch(editBookSuccess());
   });
 };

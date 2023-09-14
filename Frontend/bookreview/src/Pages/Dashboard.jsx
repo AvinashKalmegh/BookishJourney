@@ -1,8 +1,9 @@
 import { DeleteIcon } from '@chakra-ui/icons';
-import { Box , Button, Flex, FormControl, Heading, Input, Text} from '@chakra-ui/react';
+import { Box , Button, Flex, FormControl, Heading, Input, Show, Text} from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import AdminDashboard from '../Components/AdminDashboard';
 
 
 
@@ -20,7 +21,7 @@ const Dashboard = () => {
     try {
       
    await axios
-    .get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/`)
+    .get(`http://localhost:3500/api/book/`)
     .then((res) => {
        setBook(res.data.result);
     })
@@ -34,7 +35,7 @@ const Dashboard = () => {
 
   const getReviewData = async()=>{
     try {
-       axios.get(`https://tiny-rose-cockroach-wrap.cyclic.app/api/review`)
+       axios.get(`http://localhost:3500/api/review`)
       .then((res)=>{
         setReview(res.data.result);
       })
@@ -46,7 +47,7 @@ const Dashboard = () => {
   // let revId = review._id;
   const deleteReviewData = async(id)=>{
     try {
-       axios.delete(`https://tiny-rose-cockroach-wrap.cyclic.app/api/review/deleteReview/${id}`)
+       axios.delete(`http://localhost:3500/api/review/deleteReview/${id}`)
       .then((res)=>{
         alert("Successfully Deleted");
         window.location.reload();
@@ -72,7 +73,7 @@ const Dashboard = () => {
           desc
   
         }
-         axios.post(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/addBook`,bookObj)
+         axios.post(`http://localhost:3500/api/book/addBook`,bookObj)
         .then((res)=>{
           alert("Successfully Added The Book");
           setUrl("");
@@ -93,7 +94,7 @@ const Dashboard = () => {
 
   const deleteBookData = async(Bookid)=>{
     try {
-       axios.delete(`https://tiny-rose-cockroach-wrap.cyclic.app/api/book/${Bookid}`)
+       axios.delete(`http://localhost:3500/api/book/${Bookid}`)
       .then((res)=>{
         alert("Successfully Deleted");
         window.location.reload();
@@ -136,12 +137,14 @@ const Dashboard = () => {
 
   return (
     <Box p={4} mt={"100px"} pb={"200px"}>
-      <Text fontSize="4xl" fontWeight="bold" mb={4}>
+      {/* <Text fontSize="4xl" fontWeight="bold" mb={4}>
         Dashboard
-      </Text>
-     
-      <Flex m={"auto"} flexDirection={{base:"column", md:"column",lg:"row"}}  w={{base:"100%", md:"70%",lg:"51%"}}  justifyContent={{base:"center",lg:"space-around"}} alignItems={{base:"center",lg:"baseline"}}>
-      
+      </Text> */}
+      <Show above={"sm"}>
+
+     <AdminDashboard/>
+      </Show>
+      <Flex  m={"auto"} mt={{base:"0px",md:"50px",lg:"50px"}} flexDirection={{base:"column", md:"column",lg:"row"}}  w={{base:"100%", md:"70%",lg:"51%"}}  justifyContent={{base:"center",lg:"space-around"}} alignItems={{base:"center",lg:"baseline"}}>
       <Flex gap={2} flexDirection={{base:"column", md:"column",lg:"row"}} justifyContent={{base:"center",lg:"space-around"}} alignItems={{base:"center",lg:"baseline"}} >
       <Box boxShadow="rgba(168, 242, 210, 0.8) 0px 30px 60px -12px inset,rgba(168, 242, 210, 0.8) 0px 18px 36px -18px inset" width={"40px"} height={"200px"} border={"3px solid rgba(168, 242, 210, 0.8)"} ></Box>
       <Text fontSize="lg" fontWeight="bold" mb={2}>

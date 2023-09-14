@@ -4,4 +4,16 @@
     border: 3px solid rgba(168, 242, 210, 0.8);
     margin-top: 30px;
     display: flex;
+    /* align-items: ; */
 }
+
+@media screen and (max-width : 609px){
+    .reviews{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center ;
+    }
+    /* #voice{
+        width: 100%;
+    } */
+  }
