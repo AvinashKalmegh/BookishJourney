@@ -6,6 +6,9 @@ import {
   USER_SIGNUP_SUCCESS,
 } from "./actionTypes";
 
+let url = "https://tiny-skirt-hen.cyclic.app";
+
+
 const signinRequestAction = () => {
   return { type: USER_SIGNIN_REQUEST };
 };
@@ -29,7 +32,7 @@ export const signin = (userData) => (dispatch) => {
   dispatch(signinRequestAction());
 
   return axios
-    .post("http://localhost:3500/api/user/signin", userData)
+    .post(`${url}/api/user/signin`, userData)
     .then((res) => {
       console.log(res.data);
       localStorage.setItem("token",JSON.stringify(res.data.token))
@@ -44,7 +47,7 @@ export const signup = (userData) => (dispatch) => {
   dispatch(signinRequestAction());
 
   return axios
-    .post("http://localhost:3500/api/user/signup", userData)
+    .post(`${url}/api/user/signup`, userData)
     .then((res) => {
       console.log(res.data.result);
       dispatch(signupSuccessAction(res.data.result));

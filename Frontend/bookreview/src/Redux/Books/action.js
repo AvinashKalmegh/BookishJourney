@@ -7,6 +7,8 @@ import {
   GET_SEARCH_SUCCESS,
 } from "./actionTypes";
 
+let url = "https://tiny-skirt-hen.cyclic.app";
+
 const getBooksRequestAction = () => {
   return { type: GET_BOOKS_REQUEST };
 };
@@ -33,7 +35,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`http://localhost:3500/api/book`)
+      .get(`${url}/api/book`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
       })
@@ -48,7 +50,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`http://localhost:3500/api/book/search/${text}`)
+      .get(`${url}/api/book/search/${text}`)
       .then((res) => {
         dispatch(getSearchSuccessAction(res.data));
       })
@@ -63,7 +65,7 @@ export const getBooks =
     dispatch(getBooksRequestAction());
 
     axios
-      .get(`http://localhost:3500/api/book/${id}`)
+      .get(`${url}/api/book/${id}`)
       .then((res) => {
         dispatch(getBooksSuccessAction(res.data.result));
       })
@@ -73,7 +75,7 @@ export const getBooks =
   };
 
 export const editBook = (id, bookData) => (dispatch) => {
-  return axios.patch(`http://localhost:3500/api/book/${id}`, bookData).then(() => {
+  return axios.patch(`${url}/book/${id}`, bookData).then(() => {
     dispatch(editBookSuccess());
   });
 };

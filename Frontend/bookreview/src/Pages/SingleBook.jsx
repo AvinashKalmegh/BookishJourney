@@ -19,9 +19,12 @@ const SingleBook = () => {
   const [book, setBook] = useState({});
   const [review, setReview] = useState([]);
 
+  let url = "https://tiny-skirt-hen.cyclic.app";
+
+
 const getPertData = async()=>{
   try {
-     axios.get(`http://localhost:3500/api/book/${id}`)
+     axios.get(`${url}/api/book/${id}`)
     .then((res)=>{
       setBook(res.data.bookData);
       setReview(res.data.reviews);

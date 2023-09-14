@@ -10,6 +10,9 @@ import "./StarRating.css";
 import { DeleteIcon } from '@chakra-ui/icons';
 
 
+let url = "https://tiny-skirt-hen.cyclic.app";
+
+
 
 const Reviews = ({ review, book }) => {
   //  let reviewData = review.reviews;
@@ -17,7 +20,7 @@ const Reviews = ({ review, book }) => {
   // console.log(book._id);
   const getPertData = async (id) => {
     try {
-      axios.get(`http://localhost:3500/api/book/${id}`)
+      axios.get(`${url}/api/book/${id}`)
         .then((res) => {
 
         })
@@ -51,7 +54,7 @@ const Reviews = ({ review, book }) => {
           bookId: book._id
         }
         // console.log(obj)
-        await axios.post("http://localhost:3500/api/review/addReview", obj)
+        await axios.post(`${url}/api/review/addReview`, obj)
           .then(() => window.location.reload())
           .catch((err) => console.log(err))
 
